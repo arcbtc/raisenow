@@ -28,7 +28,7 @@ async def create_raisenow(
             data.name,
             data.description,
             data.total,
-            data,closing_date
+            data,closing_date,
             data.lnurlpay,
         ),
     )
