@@ -15,7 +15,7 @@ import shortuuid
 
 async def create_raisenow(
     wallet_id: str, data: CreateRaiseNowData, req: Request
-) -> raisenow:
+) -> RaiseNow:
     raisenow_id = urlsafe_short_hash()
     await db.execute(
         """
