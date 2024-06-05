@@ -14,8 +14,10 @@ class CreateRaiseNowData(BaseModel):
     wallet: Optional[str]
     name: Optional[str]
     description: Optional[str]
+    background_image: Optional[str]
+    header_image: Optional[str]
     total: Optional[int]
-    closing_date: Optional[str]
+    live_dates: Optional[str]
 
 
 class RaiseNow(BaseModel):
@@ -23,8 +25,10 @@ class RaiseNow(BaseModel):
     wallet: Optional[str]
     name: Optional[str]
     description: Optional[str]
+    background_image: Optional[str]
+    header_image: Optional[str]
     total: Optional[int]
-    closing_date: Optional[str]
+    live_dates: Optional[str]
     lnurlpay: Optional[str]
 
     @classmethod

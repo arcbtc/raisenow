@@ -119,7 +119,7 @@ async def create_participant(
     return participant
 
 
-async def get_raisenow(
+async def get_participant(
     raisenow_id: str, req: Optional[Request] = None
 ) -> Optional[Participant]:
     row = await db.fetchone(
@@ -135,7 +135,7 @@ async def get_raisenow(
     return rowAmended
 
 
-async def get_raisenows(
+async def get_participants(
     wallet_ids: Union[str, List[str]], req: Optional[Request] = None
 ) -> List[Participant]:
     if isinstance(wallet_ids, str):
@@ -154,7 +154,7 @@ async def get_raisenows(
     return tempRows
 
 
-async def update_raisenow(
+async def update_participant(
     raisenow_id: str, req: Optional[Request] = None, **kwargs
 ) -> Participant:
     q = ", ".join([f"{field[0]} = ?" for field in kwargs.items()])
@@ -168,7 +168,7 @@ async def update_raisenow(
     return raisenow
 
 
-async def delete_raisenow(raisenow_id: str) -> None:
+async def delete_participant(raisenow_id: str) -> None:
     await db.execute(
         "DELETE FROM raisenow.participants WHERE id = ?", (raisenow_id,)
     )

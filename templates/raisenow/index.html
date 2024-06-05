@@ -91,18 +91,22 @@
   <q-dialog v-model="formDialog.show" position="top" @hide="closeFormDialog">
     <q-card class="q-pa-lg q-pt-xl" style="width: 500px">
       <q-form @submit="sendraisenowData" class="q-gutter-md">
-        <q-input filled dense v-model.trim="formDialog.data.name" label="Name"
-          placeholder="Name for your record"></q-input>
-        <q-select filled dense emit-value v-model="formDialog.data.wallet" :options="g.user.walletOptions"
+        <q-input filled dense v-model.trim="formDialog.data.name" label="Name *"
+          placeholder="Name for your raise"></q-input>
+          <q-input filled dense v-model.trim="formDialog.data.description" label="Description *"
+          placeholder="Description for your raise "></q-input>
+          <q-select filled dense emit-value v-model="formDialog.data.wallet" :options="g.user.walletOptions"
           label="Wallet *"></q-select>
-        <q-input filled dense type="number" v-model.trim="formDialog.data.lnurlwithdrawamount"
-          label="LNURL-withdraw amount"></q-input>
-        <q-input filled dense type="number" v-model.trim="formDialog.data.lnurlpayamount"
-          label="LNURL-pay amount"></q-input>
+          <q-input filled dense v-model.trim="formDialog.data.background_image" label="Public page background image URL (optional)"
+          placeholder="Description for your raise"></q-input>
+          <q-input filled dense v-model.trim="formDialog.data.header_image" label="Public page header image URL (optional)"
+          placeholder="Description for your raise"></q-input>
+          <q-toggle v-model="formDialog.advanced_time" label="Select specific 'live dates' for fundraise (optional)"></q-toggle>
+          <q-date v-if="formDialog.advanced_time" v-model="formDialog.data.live_dates" range title="Live dates"></q-date>
         <div class="row q-mt-lg">
-          <q-btn v-if="formDialog.data.id" unelevated color="primary" type="submit">Update raisenow</q-btn>
+          <q-btn v-if="formDialog.data.id" unelevated color="primary" type="submit" color="primary">Update raisenow</q-btn>
           <q-btn v-else unelevated color="primary"
-            :disable="formDialog.data.name == null || formDialog.data.wallet == null || formDialog.data.lnurlwithdrawamount == null || formDialog.data.lnurlpayamount == null"
+            :disable="formDialog.data.name == null || formDialog.data.wallet == null || formDialog.data.description == null"
             type="submit">Create raisenow</q-btn>
           <q-btn v-close-popup flat color="grey" class="q-ml-auto">Cancel</q-btn>
         </div>
@@ -195,7 +199,7 @@
         formDialog: {
           show: false,
           data: {},
-          advanced: {}
+          advanced_time: false
         },
         urlDialog: {
           show: false,
@@ -212,6 +216,7 @@
       closeFormDialog() {
         this.formDialog.show = false
         this.formDialog.data = {}
+        this.formDialog.advanced_time = false
       },
       getraisenows: function () {
         var self = this
